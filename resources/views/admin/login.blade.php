@@ -47,7 +47,8 @@
                     @csrf
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ old('email') }}">
+                            @php $emailVal = isset($_COOKIE['email']) ? $_COOKIE['email'] : old('email') @endphp
+                            <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" value="{{ $emailVal }}">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>
@@ -58,7 +59,8 @@
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                            @php $passwordVal = isset($_COOKIE['password']) ? $_COOKIE['password'] : '' @endphp
+                            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" value="{{ $passwordVal }}">
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-lock"></span>
@@ -70,7 +72,7 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-6">
                             <div class="icheck-danger">
-                                <input type="checkbox" id="remember" name="remember">
+                                <input type="checkbox" id="remember" name="remember" @if (isset($_COOKIE['remember'])) checked @endif>
                                 <label for="remember">
                                     Remember Me
                                 </label>
