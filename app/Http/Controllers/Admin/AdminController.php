@@ -16,11 +16,19 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         if ($request->isMethod('post')) {
+            $validated = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ], [
+                'email.required' => 'Email is required.',
+                'email.email' => 'Email is not valid format.',
+                'password.required' => 'Password is required.',
+            ]);
             $data = $request->all();
             if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
                 return redirect('admin/dashboard');
             } else {
-                return redirect()->back()->with('errors', 'Invalid Email or Password!')->withInput();
+                return redirect()->back()->with('danger', 'Invalid Email or Password!')->withInput();
             }
         }
         return view('admin.login');
