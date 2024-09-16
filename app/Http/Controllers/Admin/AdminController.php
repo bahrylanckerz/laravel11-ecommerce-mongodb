@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -94,6 +95,21 @@ class AdminController extends Controller
                 'name'  => $request->name,
                 'phone' => $request->phone,
             ];
+            if ($request->hasFile('image')) {
+                $tmpImage = $request->file('image');
+                if ($tmpImage->isValid()) {
+                    $path      = 'admin/img/profile/';
+                    $extImage  = $tmpImage->getClientOriginalExtension();
+                    $filename  = time().$extImage;
+                    $pathImage = $path.$filename;
+                    Image::make($tmpImage)->save($pathImage);
+                    $oldImage = $path.Auth::guard('admin')->user()->image;
+                    if (file_exists($oldImage)) {
+                        unlink($oldImage);
+                    }
+                }
+                $data['image'] = $filename;
+            }
             Admin::where('email', $email)->update($data);
             return redirect()->back()->with('success', 'Edit profile has been successfully');
         }

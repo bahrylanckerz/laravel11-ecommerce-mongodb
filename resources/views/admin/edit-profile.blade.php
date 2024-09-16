@@ -65,6 +65,13 @@
                                         <input type="text" id="phone" name="phone" class="form-control @error('phone') is-invalid @enderror" placeholder="Enter Phone Number" value="{{ $phoneVal }}">
                                         @error('phone') <small class="text-danger">{{ $message }}</small> @enderror
                                     </div>
+                                    @if (!empty(Auth::guard('admin')->user()->image))
+                                        <div class="form-group">
+                                            <label>Current Photo</label>
+                                            <br>
+                                            <img src="{{ asset('admin/img/profile/'.Auth::guard('admin')->user()->image) }}" alt="photo-profile" width="150">
+                                        </div>
+                                    @endif
                                     <div class="form-group">
                                         <label for="image">Photo Profile</label>
                                         <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" placeholder="Enter Phone Number">
