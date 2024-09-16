@@ -15,6 +15,15 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/css/adminlte.min.css') }}">
+
+    <style>
+        .nav-link.active {
+            background-color: #dc3545 !important;
+        }
+        .nav-treeview > .nav-item > .nav-link.active {
+            background-color: rgba(255, 255, 255, .9) !important;
+        }
+    </style>
 </head>
 <!--
 `body` tag options:
