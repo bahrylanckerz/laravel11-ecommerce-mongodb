@@ -8,11 +8,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
+        Session::put('menu', 'dashboard');
+        Session::put('page', 'dashboard');
         return view('admin.dashboard');
     }
 
@@ -47,6 +50,8 @@ class AdminController extends Controller
 
     public function updatePassword(Request $request)
     {
+        Session::put('menu', 'admin-management');
+        Session::put('page', 'update-password');
         if ($request->isMethod('post')) {
             $validated = $request->validate([
                 'email'           => 'required|email',
@@ -78,6 +83,8 @@ class AdminController extends Controller
 
     public function editProfile(Request $request)
     {
+        Session::put('menu', 'admin-management');
+        Session::put('page', 'edit-profile');
         if ($request->isMethod('post')) {
             $validated = $request->validate([
                 'email' => 'required|email',

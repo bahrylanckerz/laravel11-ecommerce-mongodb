@@ -26,13 +26,13 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item">
-                    <a href="{{ url('admin/dashboard') }}" class="nav-link active">
+                    <a href="{{ url('admin/dashboard') }}" class="nav-link @if (Session::get('page') == 'dashboard') active @endif">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item @if (Session::get('menu') == 'admin-management') menu-open @endif">
+                    <a href="#" class="nav-link @if (Session::get('menu') == 'admin-management') active @endif">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Admin Management
@@ -41,13 +41,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ url('admin/update-password') }}" class="nav-link">
+                            <a href="{{ url('admin/update-password') }}" class="nav-link @if (Session::get('page') == 'update-password') active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Update Password</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('admin/edit-profile') }}" class="nav-link">
+                            <a href="{{ url('admin/edit-profile') }}" class="nav-link @if (Session::get('page') == 'edit-profile') active @endif">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Edit Profile</p>
                             </a>
