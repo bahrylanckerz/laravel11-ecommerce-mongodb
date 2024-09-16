@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CmsPageController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,5 +15,7 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::match(['get', 'post'], 'update-password', [AdminController::class, 'updatePassword']);
         Route::match(['get', 'post'], 'edit-profile', [AdminController::class, 'editProfile']);
         Route::get('logout', [AdminController::class, 'logout']);
+        // CMS Pages
+        Route::get('cms-pages', [CmsPageController::class, 'index']);
     });
 });

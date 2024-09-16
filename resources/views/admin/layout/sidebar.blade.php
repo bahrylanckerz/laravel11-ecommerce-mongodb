@@ -31,6 +31,23 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
+                <li class="nav-item @if (Session::get('menu') == 'pages-management') menu-open @endif">
+                    <a href="#" class="nav-link @if (Session::get('menu') == 'pages-management') active @endif">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Pages Management
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url('admin/cms-pages') }}" class="nav-link @if (Session::get('page') == 'cms-pages') active @endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>CMS Pages</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item @if (Session::get('menu') == 'admin-management') menu-open @endif">
                     <a href="#" class="nav-link @if (Session::get('menu') == 'admin-management') active @endif">
                         <i class="nav-icon fas fa-users"></i>
