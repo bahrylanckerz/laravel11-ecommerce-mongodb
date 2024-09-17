@@ -17,5 +17,6 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('logout', [AdminController::class, 'logout']);
         // CMS Pages
         Route::get('cms-pages', [CmsPageController::class, 'index']);
+        Route::get('update-cms-pages-status/{status}/{id}', [CmsPageController::class, 'updateStatus']);
     });
 });

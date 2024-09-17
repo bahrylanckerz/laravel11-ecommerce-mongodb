@@ -53,9 +53,9 @@
                                                 <td>{{ $row->created_at }}</td>
                                                 <td align="center">
                                                     @if ($row->status == 1)
-                                                        <a href="#" class="text-success" style="font-size:18px"><i class="fas fa-check-circle"></i></a>
+                                                        <a href="javascript:void(0)" class="text-success" onclick="location.href='{{ url('admin/update-cms-pages-status/0/'.$row->id) }}'" style="font-size:18px"><i class="fas fa-check-circle"></i></a>
                                                     @else
-                                                        <a href="#" class="text-danger" style="font-size:18px"><i class="fas fa-times-circle"></i></a>
+                                                        <a href="javascript:void(0)" class="text-danger" onclick="location.href='{{ url('admin/update-cms-pages-status/1/'.$row->id) }}'" style="font-size:18px"><i class="fas fa-times-circle"></i></a>
                                                     @endif
                                                 </td>
                                                 <td align="center">

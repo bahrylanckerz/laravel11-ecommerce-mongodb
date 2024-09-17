@@ -61,6 +61,12 @@ class CmsPageController extends Controller
         //
     }
 
+    public function updateStatus($status, $id)
+    {
+        CmsPage::where('id', $id)->update(['status' => $status]);
+        return redirect()->back();
+    }
+
     /**
      * Remove the specified resource from storage.
      */
