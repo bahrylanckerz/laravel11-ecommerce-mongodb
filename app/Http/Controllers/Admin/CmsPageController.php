@@ -24,9 +24,28 @@ class CmsPageController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if ($request->isMethod('post')) {
+            $validated = $request->validate([
+                'title'       => 'required',
+                'url'         => 'required|lowercase',
+                'description' => 'required',
+            ], [
+                'title.required'       => 'Title is required.',
+                'url.required'         => 'URL is required.',
+                'url.lowercase'        => 'URL must be lowercase.',
+                'description.required' => 'Description is required.',
+            ]);
+            CmsPage::create([
+                'title'       => $request->title,
+                'url'         => str_replace(' ', '-', $request->url),
+                'description' => $request->description,
+                'status'      => 1,
+            ]);
+            return redirect('admin/cms-pages')->with('success', 'CMS Pages created successfully');
+        }
+        return view('admin.pages.create');
     }
 
     /**
@@ -48,9 +67,29 @@ class CmsPageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CmsPage $cmsPage)
+    public function edit(Request $request, $id)
     {
-        //
+        $cmsPage = CmsPage::find($id);
+        if ($request->isMethod('post')) {
+            $validated = $request->validate([
+                'title'       => 'required',
+                'url'         => 'required|lowercase',
+                'description' => 'required',
+            ], [
+                'title.required'       => 'Title is required.',
+                'url.required'         => 'URL is required.',
+                'url.lowercase'        => 'URL must be lowercase.',
+                'description.required' => 'Description is required.',
+            ]);
+            CmsPage::where('id', $id)->update([
+                'title'       => $request->title,
+                'url'         => str_replace(' ', '-', $request->url),
+                'description' => $request->description,
+            ]);
+            return redirect('admin/cms-pages')->with('success', 'CMS Pages updated successfully');
+        }
+        $data['cmsPage'] = $cmsPage;
+        return view('admin.pages.edit', $data);
     }
 
     /**
@@ -70,8 +109,9 @@ class CmsPageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CmsPage $cmsPage)
+    public function destroy($id)
     {
-        //
+        CmsPage::where('id', $id)->delete();
+        return redirect('admin/cms-pages')->with('success', 'CMS Pages deleted successfully');
     }
 }

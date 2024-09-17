@@ -8,4 +8,16 @@ use MongoDB\Laravel\Eloquent\Model;
 class CmsPage extends Model
 {
     use HasFactory;
+
+    protected $guard = 'admin';
+
+    protected $fillable = [
+        'title',
+        'url',
+        'description',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'status',
+    ];
 }

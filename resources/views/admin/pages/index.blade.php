@@ -34,6 +34,25 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <div class="btn-group mb-3">
+                                <button type="button" class="btn btn-danger" onclick="location.href='{{ url('admin/create-cms-pages') }}'"><i class="fas fa-plus mr-2"></i>Add New</button>
+                            </div>
+                            @if (Session::has('success'))
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    {{ Session::get('success') }}
+                                </div>
+                            @elseif (Session::has('warning'))
+                                <div class="alert alert-warning alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    {{ Session::get('warning') }}
+                                </div>
+                            @elseif (Session::has('danger'))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    {{ Session::get('danger') }}
+                                </div>
+                            @endif
                             <table class="table table-striped datatable">
                                 <thead>
                                     <tr class="bg-dark">
@@ -60,12 +79,12 @@
                                                 </td>
                                                 <td align="center">
                                                     <div class="btn-group btn-group-sm">
-                                                        <a href="{{ url('admin/edit-cms-pages') }}" class="btn btn-warning" title="Edit">
+                                                        <button type="button" class="btn btn-warning" title="Edit" onclick="location.href='{{ url('admin/edit-cms-pages/'.$row->id) }}'">
                                                             <i class="fas fa-edit"></i>
-                                                        </a>
-                                                        <a href="javascript:void(0)" class="btn btn-danger" title="Delete" recordid="{{ $row->id }}">
+                                                        </button>
+                                                        <button type="button" class="btn btn-danger" title="Delete" onclick="location.href='{{ url('admin/delete-cms-pages/'.$row->id) }}'">
                                                             <i class="fas fa-times"></i>
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>

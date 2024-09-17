@@ -32,6 +32,12 @@
             background-color: #dc3545 !important;
             border-color: #dc3545 !important;
         }
+        .breadcrumb-item a {
+            color: #dc3545 !important;
+        }
+        .breadcrumb-item a:hover {
+            color: #b62d3a !important;
+        }
     </style>
 </head>
 <!--
